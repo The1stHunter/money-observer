@@ -1,0 +1,51 @@
+.cashflow__header {
+    font-size: var(--header-font-size);
+    text-align: var(--header-text-align);
+    margin-bottom: var(--header-margin-bottom);
+}
+
+.cashflow__body {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cashflow-card {
+    border: 1px solid var(--border-color);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    font-size: var(--main-text-font-size);
+}
+
+.cashflow-card__cashflow {
+    margin: var(--cashflow-card-cashflow-margin);
+}
+
+.cashflow-card__details {
+    cursor: pointer;
+    font-size: var(--small-text-font-size);
+    color: var(--gray);
+    display: inline-block;
+}
+
+.cashflow-type ul {
+    list-style: none;
+    margin: 0;
+    padding: var(--card-ul-padding);
+}
+
+.cashflow-type li {
+    font-size: var(--sub-text-font-size);
+}
+
+.cashflow-type_type_income {
+    color: var(--green);
+}
+
+.cashflow-type_type_expenses {
+    color: var(--red);
+}
+
+.cashflow-type_type_saves {
+    color: var(--yellow);
+}

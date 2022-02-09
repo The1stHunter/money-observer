@@ -1,0 +1,37 @@
+.accounts__header {
+    font-size: var(--header-font-size);
+    text-align: var(--header-text-align);
+    margin-bottom: var(--header-margin-bottom);
+}
+
+.accounts__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--tabs-gap);
+    font-size: var(--main-text-font-size);
+}
+
+.accounts__item {
+    cursor: pointer;
+    border-radius: var(--card-border-radius);
+    border: 1px solid var(--border-color);
+    padding: var(--card-padding);
+    display: flex;
+    align-items: center;
+}
+
+.accounts__item:hover {
+    border-color: var(--hover-border-color);
+}
+
+.accounts__item_add {
+    color: var(--button-color);
+}
+
+.accounts__item_add:hover {
+    color: var(--hover-button-color);
+}

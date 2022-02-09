@@ -1,0 +1,21 @@
+.menu {
+    display: flex;
+    justify-content: center;
+    gap: var(--tabs-gap);
+    margin-bottom: var(--tabs-margin-bottom);
+}
+
+.menu__button {
+    font-size: var(--tabs-font-size);
+    cursor: pointer;
+    padding: var(--tabs-padding);
+    background-color: var(--light-purple);
+    border-radius: var(--tabs-border-radius);
+}
+.menu__button:hover:not(.menu__button_active) {
+    background-color: var(--purple);
+}
+
+.menu__button_active {
+    background-color: var(--dark-purple);
+}

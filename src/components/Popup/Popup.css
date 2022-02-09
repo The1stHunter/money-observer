@@ -1,0 +1,65 @@
+.popup__wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: var(--lightest-gray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    position: relative;
+    border-radius: var(--card-border-radius);
+    border: 1px solid var(--light-gray);
+    background-color: var(--white);
+    padding: var(--popup-padding);
+    display: flex;
+    flex-direction: column;
+}
+
+.popup__close-button {
+    position: absolute;
+    cursor: pointer;
+    top: .2rem;
+    right: .45rem;
+    color: var(--button-color);
+    font-size: var(--popup-header-font-size);
+}
+
+.popup__close-button:hover {
+    color: var(--hover-button-color);
+}
+
+.popup__title {
+    text-align: center;
+    font-size: var(--popup-header-font-size);
+    margin-bottom: var(--header-margin-bottom);
+}
+
+.popup__content {
+    flex-grow: 1;
+}
+
+.popup__button-panel {
+    display: flex;
+    justify-content: stretch;
+    gap: var(--tabs-gap);
+}
+
+.popup__button {
+    cursor: pointer;
+    margin-top: var(--popup-buttons-margin-button);
+    background-color: var(--light-purple);
+    border-radius: var(--button-border-radius);
+    padding: var(--popup-buttons-tab);
+    flex-grow: 1;
+    text-align: center;
+}
+
+.popup__button:hover {
+    background-color: var(--purple);
+}

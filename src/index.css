@@ -1,0 +1,56 @@
+:root {
+    /* Цвета */
+    --light-purple: rgba(226, 125, 192, .5);
+    --purple: rgba(226, 125, 192, .8);
+    --dark-purple: rgba(226, 125, 192, 1);
+
+    --green: rgb(29, 133, 59);
+    --yellow: rgb(194, 205, 18);
+    --red: rgb(246, 47, 66);
+
+    --white: rgb(255, 255, 255);
+    --lightest-gray: rgba(0, 0, 0, .03);
+    --light-gray: rgba(0, 0, 0, .2);
+    --gray: rgba(0, 0, 0, .5);
+    --dark-gray: rgba(0, 0, 0, .65);
+
+    --border-color: var(--light-gray);
+    --hover-border-color: var(--gray);
+    --button-color: var(--gray);
+    --hover-button-color: var(--dark-gray);
+
+    /* Отступы и скругления */
+    --standart-border-radius: .8rem;
+    --tabs-border-radius: var(--standart-border-radius);
+    --card-border-radius: var(--standart-border-radius);
+    --button-border-radius: .5rem;
+
+    --tabs-gap: .3rem;
+    --popup-buttons-tab: .5rem;
+
+    --tabs-margin-bottom: 2rem;
+    --header-margin-bottom: .9rem;
+    --popup-buttons-margin-button: .7rem;
+
+    --tabs-padding: .6rem .8rem;
+    --card-padding: .5rem 1rem;
+    --card-ul-padding: 0 0 0 1rem;
+    --popup-padding: 1.5rem 1.2rem 1.2rem;
+    --button-padding: .5rem .7rem;
+
+    /* Текст */
+    --tabs-font-size: 1.5rem;
+    --header-font-size: 2.2rem;
+    --header-text-align: center;
+    --main-text-font-size: 1.1rem;
+    --sub-text-font-size: 1rem;
+    --small-text-font-size: .9rem;
+    --cashflow-card-cashflow-margin: .5rem 0 .25rem;
+    --font: 'Roboto Condensed', sans-serif;
+    font-family: var(--font);
+    --popup-header-font-size: 1.25rem;
+}
+
+.html {
+    font-size: 1em + 3.2px
+}
