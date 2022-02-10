@@ -5,19 +5,18 @@ import { CashflowTab } from '../Cashflow/Cashflow';
 import { CashFlowReality } from '../../store/Cashflow';
 import { Accounts } from '../Accounts/Accounts';
 import './App.css';
-import { AllPopups } from '../Popup/Popup';
 import { Route, Routes  } from 'react-router-dom';
+import { routes } from '../../routes/routes';
 
 export const App = observer(() => {
     return (
         <div className='App'>
             <Menu />
             <Routes>
-                <Route path='/cashflow' element={<CashflowTab reality={CashFlowReality.reality} />} />
-                <Route path='/planning' element={<CashflowTab reality={CashFlowReality.plan} />} />
-                <Route path='/accounts' element={<Accounts />} />
+                <Route path={`/${routes.cashflow}/*`} element={<CashflowTab reality={CashFlowReality.reality} />} />
+                <Route path={`/${routes.planning}/*`} element={<CashflowTab reality={CashFlowReality.plan} />} />
+                <Route path={`/${routes.accounts}/*`} element={<Accounts />} />
             </Routes>
-            <AllPopups />
         </div>
     )
 });

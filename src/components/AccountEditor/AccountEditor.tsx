@@ -1,35 +1,32 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { observer } from "mobx-react-lite";
 import { bem } from '../../utils/bem';
 import accounts from '../../store/Accounts';
 import { Popup } from '../Popup/Popup';
-import { Popups } from '../../store/Popup';
-import popup from '../../store/Popup';
 import './AccountEditor.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import { popups } from '../../routes/routes';
 
 export const AccountEditor = observer(() => {
-    const { index } = popup.popups[Popups.AccountEditor];
     const className = bem('account-editor');
+
+    const { id } = useParams();
+    const index = Number(id);
 
     const checkboxRef: React.RefObject<HTMLInputElement> = useRef(null);
     const nameRef: React.RefObject<HTMLInputElement> = useRef(null);
 
-    const headerText = index === undefined ? 'Создание счёта' : 'Редактирование счёта';
-    const accountData = index !== undefined ? accounts.accounts[index] : {
+    const headerText = isNaN(index) ? 'Создание счёта' : 'Редактирование счёта';
+
+    const accountData = !isNaN(index) ? accounts.accounts[index] : {
         name: 'Новый счёт',
         countInAllAccounts: false
     };
 
     const [name, setName] = useState(accountData.name);
     const [checked, setChecked] = useState(accountData.countInAllAccounts);
-    const [prevIndex, setPrevIndex] = useState(index);
-    if (prevIndex !== index) { // Обновляем значения после открытия нового попапа
-        setName(accountData.name);
-        setChecked(accountData.countInAllAccounts);
-        setPrevIndex(index);
-    }
 
-    const saveData = () => {
+    const saveData = useCallback(() => {
         const name = nameRef.current?.value;
         const countInAllAccounts = checkboxRef.current?.checked;
 
@@ -37,12 +34,19 @@ export const AccountEditor = observer(() => {
             return;
         }
 
-        if (index === undefined) {
+        if (isNaN(index)) {
             accounts.add({ name, countInAllAccounts });
         } else {
             accounts.edit(index, { name, countInAllAccounts });
         }
-    }
+    }, [index]);
+
+    const deleteAccount = useCallback(() => {
+        accounts.remove(index);
+    }, [index]);
+
+    const navigate = useNavigate();
+    const close = useCallback(() => navigate(-1), [navigate]);
 
     const updateName = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
@@ -61,25 +65,21 @@ export const AccountEditor = observer(() => {
                 <label className={className('button')} htmlFor={checkboxId}>{labelText}</label>
                 <input id={checkboxId} type='checkbox' checked={checked} ref={checkboxRef} onChange={updateCheckbox} />
             </div>
-            <div className={className('button')}>Удалить счёт</div>
+            {!isNaN(index) ? <div className={className('button')} onClick={() => {close(); setTimeout(deleteAccount, 50)}}>Удалить счёт</div> : null} {/* setTimeout используется, чтобы при удалении последнего элемента не происходило ошибки*/}
         </div>
     );
 
     return (
         <Popup
-            popupName={Popups.AccountEditor}
             className={className()}
+            popupPath={popups.accountEditor}
             content={content}
-            hasClosButton={true}
+            hasCloseButton={true}
             title={headerText}
             hasButtonPanel={true}
             hasCancelbutton={true}
-            onOkClick={saveData}
+            onCloseClick={close}
+            onOkClick={() => {close(); saveData()}}
         />
     );
 });
-
-export const showAccauntEditor = (index?: number) => {
-    popup.editPopupData(Popups.AccountEditor, { index: index });
-    popup.showPopup(Popups.AccountEditor);
-}

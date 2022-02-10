@@ -1,13 +1,12 @@
 .account-editor {
     box-sizing: border-box;
-    height: 20rem;
     width: 17rem;
 }
 
 .account-editor__content {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    gap: var(--popup-content-gap);
     align-items: stretch;
     height: 100%;
 }

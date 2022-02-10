@@ -1,16 +1,17 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { bem } from '../../utils/bem';
 import './Menu.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { routes } from '../../routes/routes';
 
 export const Menu = () => {
-    const className = bem('menu');
+    const className = useMemo(() => bem('menu'), []);
 
     const defaultState = useMemo(() => ({
         cashflow: className('button'),
         planning: className('button'),
         accounts: className('button')
-    }), []);
+    }), [className]);
 
     const [classNames, setClassNames] = useState(defaultState);
     
@@ -19,21 +20,22 @@ export const Menu = () => {
             ...defaultState,
             [name]: className('button', {active: ''})
         });
-    }, []);
+    }, [className, defaultState]);
 
+    const location = useLocation();
     useEffect(() => {
-        const path = window.location.pathname.split('/')[1];
+        const path = location.pathname.split('/')[1];
         setClassNames({
             ...defaultState,
             [path]: className('button', {active: ''})
         });
-    }, []);
+    }, [className, defaultState, location.pathname]);
 
     return (        
         <div className={className()}>
-            <Link to='/cashflow' className={classNames.cashflow} onClick={() => onClick('cashflow')}>Кешфлоу</Link>
-            <Link to='/planning' className={classNames.planning} onClick={() => onClick('planning')}>Планирование</Link>
-            <Link to='/accounts' className={classNames.accounts} onClick={() => onClick('accounts')}>Счета</Link>
+            <Link to={`/${routes.cashflow}`} className={classNames.cashflow} onClick={() => onClick('cashflow')}>Кешфлоу</Link>
+            <Link to={`/${routes.planning}`} className={classNames.planning} onClick={() => onClick('planning')}>Планирование</Link>
+            <Link to={`/${routes.accounts}`} className={classNames.accounts} onClick={() => onClick('accounts')}>Счета</Link>
         </div>
     );
 };

@@ -1,50 +1,38 @@
-import React, { CSSProperties, ReactElement } from 'react';
+import React, { ReactElement, useMemo } from 'react';
 import { observer } from "mobx-react-lite";
-import { AccountEditor } from '../AccountEditor/AccountEditor';
-import { Popups } from '../../store/Popup';
-import popup from '../../store/Popup';
 import { bem } from '../../utils/bem';
 import { Close } from '../../font-awesome/Icons';
 import './Popup.css';
 
-export const AllPopups = observer(() => {
-
-    return (
-        <AccountEditor />
-    );
-});
-
 interface PopupProps {
-    popupName: Popups;
-    className: string;
+    popupPath: string;
+    className?: string;
     content: ReactElement;
-    hasClosButton?: boolean;
+    hasCloseButton?: boolean;
     title?: string;
     hasButtonPanel?: boolean;
     onOkClick?: () => void;
     hasCancelbutton?: boolean;
+    onCloseClick?: () => void;
 }
 
 export const Popup = observer((props: PopupProps) => {
-    const className = bem('popup');
-    const style: CSSProperties = {
-        visibility: popup.popups[props.popupName].isVisible ? 'visible' : 'hidden'
-    };
+    const className = useMemo(() => bem('popup'), []);
+    const { onCloseClick, onOkClick } = props;
 
-    const closePopup = () => {
-        popup.hidePopup(props.popupName);
-    }
-    const closeButton = props.hasClosButton ? <div className={className('close-button')} onClick={closePopup}><Close /></div> : null;
-    const title = props.title ? <div className={className('title')}>{props.title}</div> : null;
-    const buttonPanel = props.hasButtonPanel ? (
+    const closeButton = useMemo(() => props.hasCloseButton ? <div className={className('close-button')} onClick={onCloseClick}><Close /></div> : null, [className, onCloseClick, props.hasCloseButton]);
+
+    const title = useMemo(() => props.title ? <div className={className('title')}>{props.title}</div> : null, [className, props.title]);
+
+    const buttonPanel = useMemo(() => props.hasButtonPanel ? (
         <div className={className('button-panel')}>
-            {props.hasCancelbutton ? <div className={className('button')} onClick={closePopup}>Отмена</div> : null}
-            <div className={className('button')} onClick={() => {props.onOkClick?.(); closePopup()}}>Готово</div>
+            {props.hasCancelbutton ? <div className={className('button')} onClick={onCloseClick}>Отмена</div> : null}
+            <div className={className('button')} onClick={onOkClick}>Готово</div>
         </div>
-    ) : null;
+    ) : null, [className, onCloseClick, onOkClick, props.hasButtonPanel, props.hasCancelbutton]);
 
     return (
-        <div className={className('wrapper')} style={style}>
+        <div className={className('wrapper')}>
             <div className={props.className + ' ' + className()}>
                 {closeButton}
                 {title}
