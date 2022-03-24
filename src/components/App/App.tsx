@@ -1,34 +1,22 @@
 import React from 'react';
 import { Menu } from '../Menu/Menu';
-import menu, { TabName } from '../../store/Menu';
 import { observer } from 'mobx-react-lite';
 import { CashflowTab } from '../Cashflow/Cashflow';
 import { CashFlowReality } from '../../store/Cashflow';
 import { Accounts } from '../Accounts/Accounts';
 import './App.css';
-import { AllPopups } from '../Popup/Popup';
+import { Route, Routes  } from 'react-router-dom';
+import { routes } from '../../routes/routes';
 
 export const App = observer(() => {
-    let tab;
-    switch (menu.tab) {
-        case TabName.planning:
-            tab = <CashflowTab reality={CashFlowReality.plan} />;
-            break;
-        case TabName.cashflow:
-            tab = <CashflowTab reality={CashFlowReality.reality} />;
-            break;
-        case TabName.accounts:
-            tab = <Accounts />;
-            break;
-        default:
-            break;
-    }
-
     return (
         <div className='App'>
             <Menu />
-            {tab}
-            <AllPopups />
+            <Routes>
+                <Route path={`/${routes.cashflow}/*`} element={<CashflowTab reality={CashFlowReality.reality} />} />
+                <Route path={`/${routes.planning}/*`} element={<CashflowTab reality={CashFlowReality.plan} />} />
+                <Route path={`/${routes.accounts}/*`} element={<Accounts />} />
+            </Routes>
         </div>
     )
 });

@@ -6,6 +6,8 @@
 }
 
 .menu__button {
+    color: var(--black);
+    text-decoration: none;
     font-size: var(--tabs-font-size);
     cursor: pointer;
     padding: var(--tabs-padding);

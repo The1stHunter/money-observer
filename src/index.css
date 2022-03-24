@@ -13,6 +13,7 @@
     --light-gray: rgba(0, 0, 0, .2);
     --gray: rgba(0, 0, 0, .5);
     --dark-gray: rgba(0, 0, 0, .65);
+    --black: rgb(0, 0, 0);
 
     --border-color: var(--light-gray);
     --hover-border-color: var(--gray);
@@ -27,6 +28,7 @@
 
     --tabs-gap: .3rem;
     --popup-buttons-tab: .5rem;
+    --popup-content-gap: .6rem;
 
     --tabs-margin-bottom: 2rem;
     --header-margin-bottom: .9rem;

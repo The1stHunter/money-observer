@@ -16,6 +16,8 @@
 }
 
 .accounts__item {
+    color: var(--black);
+    text-decoration: none;
     cursor: pointer;
     border-radius: var(--card-border-radius);
     border: 1px solid var(--border-color);
